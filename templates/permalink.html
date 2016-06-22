@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{post.render() | safe}}
+<br>
+<br>
+<div class="error">{{error}}</div>
+<a class="login-link" href="/blog/editpost/{{post.key().id()}}">Edit</a>
+&nbsp;&nbsp;
+<a class="login-link" href="/blog/deletepost/{{post.key().id()}}">Delete</a>
+<br><br><br>
+{% if not error %}
+  <form method="post">
+    <label>
+      <div class="comment-heading">Comment</div>
+      <textarea class="comment-textarea" rows="4" cols="50" name="comment">{{comment}}</textarea>
+    </label>
+    <input type="submit" value="Post Comment">
+  </form>
+  <div class="error">{{error_comment}}</div>
+{% endif %}
+<hr>
+{% for comment in comments %}
+    <div>
+      <pre class="comment-contents">{{comment.content}}</pre>
+      <div class="comment-modified">posted by: {{comment.createdby}}  {{comment.last_modified.strftime("%b %d %Y %H:%M:%S")}}</div>
+      <a class="login-link" href="/blog/editcomment/{{comment.key().id()}}">Edit</a>
+      &nbsp;&nbsp;
+      <a class="login-link" href="/blog/deletecomment/{{comment.key().id()}}">Delete</a>
+
+      <hr>
+    </div>
+{% endfor %}
+
+{% endblock %}
+

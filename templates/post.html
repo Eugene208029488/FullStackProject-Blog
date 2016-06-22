@@ -1,0 +1,32 @@
+<div class="post">
+  <div class="post-heading">
+
+    <div class="post-title">
+      <a href="/blog/{{p.key().id()}}" class="post-title">
+        {{p.subject}}
+      </a>
+      <div class="post-creator">
+        Posted by:{{p.createdby}}
+      </div>
+
+
+    </div>
+    <div class="post-date">
+      {{p.created.strftime("%b %d, %Y")}}
+    </div>
+  </div>
+
+  <div class="post-content">
+    {{p._render_text | safe}}
+  </div>
+  <br>
+  <div>
+    <a href="/blog/likepost/{{p.key().id()}}" class="like-link">
+      {% if p.likes > 0 %}
+        <img src="/static/like2.jpg" alt="Like" class="like-icon"> {{p.likes}}
+      {% else %}
+        <img src="/static/unlike2.jpg" alt="UnLike" class="like-icon">
+      {% endif %}
+    </a>
+   </div>
+</div>
